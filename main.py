@@ -69,14 +69,14 @@ def search_repositories(url_list):
 			url = future_to_url[future]
 			try:
 				data = future.result()
-				dict_list.append(data)
-
+				if len(data) != 0:
+					dict_list.append(data)
 			except Exception as exc:
 				time.sleep(1)
 				continue
 				# print('%r generated an exception: %s' % (url, exc))
 			else:
-				print('%r page is %d bytes' % (url, len(data)))
+				print('%r  get person %d ' % (url, len(data)))
 			progress_bar.step(1)
 			win.update()
 	return dict_list
@@ -152,7 +152,7 @@ def get_keyword():
 	end=15
 	pages=end-start
 	if len(keyword)==0:
-		messagebox.showinfo(title='输入内容为空', message=keyword)
+		messagebox.showinfo(title="来自gxn的警告", message='输入内容为空')
 	else:
 		progress_bar['value']=0
 		progress_bar['maximum'] = pages * 25
