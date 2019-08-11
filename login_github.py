@@ -5,6 +5,7 @@
 # @Last Modified time: 2019-08-04 23:34:42
 import requests
 import json
+import time
 def auth_search(url):
     header = {
         'User-Agent': "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3710.0 Safari/537.36",
@@ -18,11 +19,9 @@ def auth_search(url):
             response = requests.get(url,headers=header)
             # print(response.status_code)
             if response.status_code == 200:
-                # for key,value in response.json().items():
-                    # print(key,value)
                 return response.json()
         except Exception as e:
-            print(e)
+            time.sleep(1)
             status = True
     return None
     # print(response.url)
@@ -44,6 +43,6 @@ def get_userinfo(username):
 if __name__ == "__main__":
     url="https://api.github.com/users/ruanyf"
     print(auth_search(url))
-    print(get_userinfo("ruanyf"))
+    # print(get_userinfo("ruanyf"))
 
 # https://www.cnblogs.com/zhangxinqi/p/9201594.html
