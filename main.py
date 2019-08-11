@@ -16,6 +16,7 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 from login_github import auth_search,get_userinfo
+
 # os.reload(sys);
 # sys.setdefaultencoding("utf8")
 
@@ -86,10 +87,12 @@ def search_repositories(keyword,start,end):
 				username = str(item["owner"]["login"])
 				email,blog,name,location = get_userinfo(username)
 				lists = [name,email,location,blog,github_url,update_time,home_page,description]
-				print(count)
+				# print(count)
 				append_write_to_csvfile(filename+".csv",lists,True)
 				count += 1
 				progress_bar.step(1)
+				win.update()
+
 			# print("asdfsa")
 
 		else:
@@ -111,8 +114,9 @@ def get_keyword():
 	if len(keyword)==0:
 		messagebox.showinfo(title='输入内容为空', message=keyword)
 	else:
+		progress_bar['value']=pages*30
 		progress_bar['maximum']=pages*30
-		print(progress_bar['maximum'])
+		print(progress_bar['value'])
 		search_repositories(keyword,start,end)
 		print("Done")
 		# filename = keyword.encode('gbk')
@@ -131,6 +135,7 @@ if __name__ == '__main__':
 
 	button1 = Button(line_search,text = "查找" ,width = 15,height = 1,command = get_keyword)
 	button1.pack(side=LEFT, expand=YES,fill=BOTH)
+
 
 	progress_bar=ttk.Progressbar(win, orient = 'horizontal',mode='determinate',value=0)
 	progress_bar.pack(side=LEFT,expand=YES,fill=BOTH)
