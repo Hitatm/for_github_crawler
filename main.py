@@ -33,7 +33,7 @@ win.title("猎头搜索引擎")
 # win.geometry("700x500+200+50")
 
 e_keyword = StringVar()
-e_keyword.set("人工智能")
+# e_keyword.set("人工智能")
 
 
 
